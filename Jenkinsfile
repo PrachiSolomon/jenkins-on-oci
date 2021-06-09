@@ -2,16 +2,11 @@ pipeline {
   agent any
   stages {
     stage('Fetch dependencies') {
-      parallel {
-        stage('Fetch dependencies') {
           steps {
-             sh 'whoami'
-             sh 'sudo docker pull nginx:latest'
-           
+            sh 'sudo docker pull nginx:latest'
+            sh 'whoami'
           }
         }
-
-       
 
     stage('Build docker image') {
       steps {
@@ -32,6 +27,6 @@ pipeline {
         sh 'sudo docker push  syd.ocir.io/sddlrhn3qfno/nginx:custom'
       }
     }
-
   }
+  
 }
