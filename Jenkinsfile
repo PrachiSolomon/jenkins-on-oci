@@ -4,7 +4,6 @@ pipeline {
     stage('Fetch dependencies') {
           steps {
             sh 'sudo docker pull nginx:latest'
-            sh 'whoami'
           }
         }
 
