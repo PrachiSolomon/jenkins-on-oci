@@ -3,13 +3,13 @@ pipeline {
   stages {
     stage('Fetch dependencies') {
           steps {
-            sh 'sudo docker pull nginx:latest'
+            sh 'sudo docker pull demo/hello-java:latest'
           }
         }
 
     stage('Build docker image') {
       steps {
-        sh 'sudo docker build . -t customnginx:1'
+        sh 'sudo docker build . -t customdemo:1'
       }
     }
 
@@ -22,8 +22,8 @@ pipeline {
     stage('Push image to Object Storage') {
       steps {
         sh 'sudo docker login -u \'sddlrhn3qfno/oracleidentitycloudservice/jason.greene@nanoputian.io\' -p \'4sHW;(wJqn;f<21CA0cG\' syd.ocir.io'
-        sh 'sudo docker tag demo syd.ocir.io/sddlrhn3qfno/demo'
-        sh 'sudo docker push  syd.ocir.io/sddlrhn3qfno/demo'
+        sh 'sudo docker tag customdemo syd.ocir.io/sddlrhn3qfno/demo'
+        sh 'sudo docker push  syd.ocir.io/sddlrhn3qfno/demo/hello-java'
       }
     }
   }
