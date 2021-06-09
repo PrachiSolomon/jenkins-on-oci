@@ -5,14 +5,14 @@ pipeline {
         /* This stage pulls the latest nginx image from
            Dockerhub */
             steps {
-                sh 'sudo -S docker pull nginx:latest'
+                sh 'sudo docker pull nginx:latest'
           }
         }
         stage('Build docker image') {
         /* This stage builds the actual image; synonymous to
            docker build on the command line */
             steps {
-            sh "sudo -S docker build . -t customnginx:1"
+            sh "sudo docker build . -t customnginx:1"
             }    
         }
         stage('Test image') {
