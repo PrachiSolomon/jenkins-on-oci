@@ -5,19 +5,13 @@ pipeline {
       parallel {
         stage('Fetch dependencies') {
           steps {
-            sh 'sudo docker pull nginx:latest'
-            sh 'whoami'
+             sh 'whoami'
+             sh 'sudo docker pull nginx:latest'
+           
           }
         }
 
-        stage('') {
-          steps {
-            sh 'whoami'
-          }
-        }
-
-      }
-    }
+       
 
     stage('Build docker image') {
       steps {
