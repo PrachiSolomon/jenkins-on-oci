@@ -2,9 +2,20 @@ pipeline {
   agent any
   stages {
     stage('Fetch dependencies') {
-      steps {
-        sh 'sudo docker pull nginx:latest'
-        sh 'whoami'
+      parallel {
+        stage('Fetch dependencies') {
+          steps {
+            sh 'sudo docker pull nginx:latest'
+            sh 'whoami'
+          }
+        }
+
+        stage('') {
+          steps {
+            sh 'whoami'
+          }
+        }
+
       }
     }
 
