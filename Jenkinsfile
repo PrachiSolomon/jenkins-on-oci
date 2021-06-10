@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Fetch dependencies') {
           steps {
-            sh 'sudo docker pull demo/hello-java:latest'
+            sh 'fn --verbose deploy --app hello-java'
           }
         }
 
