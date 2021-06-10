@@ -2,7 +2,7 @@ pipeline {
   agent any
   stages {
       stage('Create Fn Context') {
-          def status = sh ' fn create context InkItApplications --provider oracle'
+          
           steps {
             
             sh ' fn use context InkItApplications'
