@@ -24,6 +24,7 @@ pipeline {
       
       stage('Deploy') {
         steps {
+          sh 'sudo docker login -u sddlrhn3qfno/oracleidentitycloudservice/jason.greene@nanoputian.io -p '4sHW;(wJqn;f<21CA0cG' syd.ocir.io'
           sh 'fn -v deploy --app sampleappInk'
         }
       }
