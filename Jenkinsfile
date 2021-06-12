@@ -1,32 +1,37 @@
 pipeline {
-  agent any
+  agent { label 'jenkinslave' }
   stages {
-    stage('Fetch dependencies') {
+      stage('Create Fn Context') {
+          
           steps {
-            sh 'sudo docker pull nginx:latest'
-            sh 'whoami'
+            echo 'fn create context InkItApplications --provider oracle <== to be added conditionally if context doesnt exist'
+            echo ' fn use context InkItApplications'
+            sh ' fn update context oracle.compartment-id ocid1.compartment.oc1..aaaaaaaadbceuq6km7y27ufzdmihj6tb35dbv2sgpy6j3dtf2gypbkejflyq'
+            sh ' fn update context api-url https://functions.ap-sydney-1.oraclecloud.com'
+            sh ' fn update context registry syd.ocir.io/sddlrhn3qfno/sampleappinkrepo'
+            sh ' fn update context InkItApplications default'
           }
         }
 
-    stage('Build docker image') {
-      steps {
-        sh 'sudo docker build . -t customnginx:1'
-      }
-    }
-
-    stage('Test image') {
-      steps {
+      stage('Test image') {
+        steps {
+           
         sh 'echo "Tests successful"'
+        }
       }
-    }
-
-    stage('Push image to Object Storage') {
-      steps {
-        sh 'sudo docker login -u \'sddlrhn3qfno/oracleidentitycloudservice/jason.greene@nanoputian.io\' -p \'4sHW;(wJqn;f<21CA0cG\' syd.ocir.io'
-        sh 'sudo docker tag customnginx:1 syd.ocir.io/sddlrhn3qfno/nginx:custom'
-        sh 'sudo docker push  syd.ocir.io/sddlrhn3qfno/nginx:custom'
+     
+     
+      
+      stage('Deploy') {
+        steps {
+            
+            sh ' docker login -u \'sddlrhn3qfno/oracleidentitycloudservice/jason.greene@nanoputian.io\' -p \'4sHW;(wJqn;f<21CA0cG\' syd.ocir.io'
+            sh 'cat ~/.docker/config.json'
+          sh 'fn deploy --app sampleappInk --registry syd.ocir.io/sddlrhn3qfno/sampleappinkrepo '
+        }
       }
-    }
-
+    
+  }
   
 }
+
