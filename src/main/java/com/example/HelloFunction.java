@@ -22,7 +22,7 @@ public class HelloFunction {
     }
 
     public String handleRequest(String input, RuntimeContext ctx) {
-        System.out.println("Inside Java Hello World function"); 
+        System.out.println("Inside Java Hello World function" ); 
         String name = (input == null || input.isEmpty()) ? "world"  : input;
         Map<String, String> environmentMap = ctx.getConfiguration();
         SortedMap<String, String> sortedEnvMap = new TreeMap<>(environmentMap);
@@ -33,6 +33,7 @@ public class HelloFunction {
         for (String key : keySet) {
         	String value = environmentMap.get(key);
         	outStr = outStr + ( key + ": " + value + "\n");
+              System.out.println( key + ": " + value + "\n"); 
         }
         
         return outStr;
