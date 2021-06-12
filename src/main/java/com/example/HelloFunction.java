@@ -11,6 +11,8 @@ public class HelloFunction {
     @FnConfiguration
     public void config(RuntimeContext ctx) {
 
+        System.out.println(ctx.toString());
+
         dbHost = ctx.getConfigurationByKey("DB_HOST_URL").orElse("//localhost/DBName");
 
         dbUser = ctx.getConfigurationByKey("DB_USER").orElse("your-db-account");
