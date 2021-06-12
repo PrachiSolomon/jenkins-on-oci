@@ -1,6 +1,10 @@
 package com.example.fn;
 import com.fnproject.fn.api.FnConfiguration;
 import com.fnproject.fn.api.RuntimeContext;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class HelloFunction {
     /* Vars for Env Variables */
