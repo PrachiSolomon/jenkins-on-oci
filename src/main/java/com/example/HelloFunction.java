@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import com.fnproject.fn.api.httpgateway;
+import com.fnproject.fn.api.httpgateway.HTTPGatewayContext;
 import com.fnproject.fn.api.Headers;
 import com.fnproject.fn.api.InvocationContext;
 import com.fnproject.fn.api.QueryParameters;
@@ -16,6 +16,7 @@ public class HelloFunction {
     private String dbHost;		// DB_HOST
     private String dbUser;		// DB_USER
     private String dbPassword;	// DB_PASSWORD
+    private static final Logger LOGGER = Logger.getLogger(HelloFunction.class.getName());
     
     @FnConfiguration
     public void config(RuntimeContext ctx) {
@@ -30,13 +31,13 @@ public class HelloFunction {
 
     }
 
-   public String handleRequest(String input,HTTPGatewayContext hctx) throws JsonProcessingException {
+   public String handleRequest(String input,HTTPGatewayContext hctx)  {
         String name = (input == null || input.isEmpty()) ? "world"  : input;
         String httpMethod = hctx.getMethod();
         String httpRequestURI = hctx.getRequestURL();
         QueryParameters queryparams = hctx.getQueryParameters();
 
-        LOGGER.info("Inside Java Hello World function"); 
-        return "Hello, " + name + queryparams.get("name")+ "!";
+        LOGGER.info("Inside Java Hello World function"+ queryparams.get("name")); 
+        return "Hello, " + name +  "!";
     }
 }
