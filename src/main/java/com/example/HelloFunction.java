@@ -36,7 +36,7 @@ public class HelloFunction {
         String httpMethod = hctx.getMethod();
         String httpRequestURI = hctx.getRequestURL();
         QueryParameters queryparams = hctx.getQueryParameters();
-
+        LOGGER.info("QP"+queryparams);
         LOGGER.info("Inside Java Hello World function"+ queryparams.get("name")); 
         return "Hello, " + name +  "!";
     }
