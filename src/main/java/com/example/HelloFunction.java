@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import com.fnproject.fn.api.httpgateway;
+import com.fnproject.fn.api.Headers;
+import com.fnproject.fn.api.InvocationContext;
+import com.fnproject.fn.api.QueryParameters;
+import java.util.logging.Logger;
 
 public class HelloFunction {
     /* Vars for Env Variables */
@@ -25,24 +30,13 @@ public class HelloFunction {
 
     }
 
-    public String handleRequest(String input, RuntimeContext ctx) {
-        System.out.println("Inside Java Hello World function" ); 
+   public String handleRequest(String input,HTTPGatewayContext hctx) throws JsonProcessingException {
         String name = (input == null || input.isEmpty()) ? "world"  : input;
-        Map<String, String> environmentMap = ctx.getConfiguration();
-        SortedMap<String, String> sortedEnvMap = new TreeMap<>(environmentMap);
-        Set<String> keySet = sortedEnvMap.keySet();
-        
-        String outStr  = "---\n";
-        
-        for (String key : keySet) {
-        	String value = environmentMap.get(key);
-        	outStr = outStr + ( key + ": " + value + "\n");
-              System.out.println( key + ": " + value + "\n"); 
-        }
-        
-        return outStr;
-        
-       // return "Hello, " + name + "!";
-    }
+        String httpMethod = hctx.getMethod();
+        String httpRequestURI = hctx.getRequestURL();
+        QueryParameters queryparams = hctx.getQueryParameters();
 
+        LOGGER.info("Inside Java Hello World function"); 
+        return "Hello, " + name + queryparams.get("name")+ "!";
+    }
 }
