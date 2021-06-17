@@ -38,8 +38,8 @@ public class HelloFunction {
         QueryParameters queryparams = hctx.getQueryParameters();
         LOGGER.info("QP:"+queryparams.getAll().toString());
         LOGGER.info("Inside Java Hello World function"+ queryparams.get("name")); 
-       if( name.equals("world") && queryparams("name") ){
-          name = queryparams("name")
+       if( name.equals("world") && queryparams.get("name") ){
+          name = queryparams.get("name")
        }
         return "Hello, " + name +  "!";
     }
