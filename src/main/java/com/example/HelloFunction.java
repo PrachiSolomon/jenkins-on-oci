@@ -39,7 +39,7 @@ public class HelloFunction {
         LOGGER.info("QP:"+queryparams.getAll().toString());
         LOGGER.info("Inside Java Hello World function"+ queryparams.get("name")); 
        if( name.equals("world") & (queryparams.get("name") != null) ){
-          name = queryparams.get("name");
+          name = queryparams.get("name").toString();
        }
         return "Hello, " + name +  "!";
     }
