@@ -1,5 +1,9 @@
 pipeline {
   agent { label 'jenkinslave' }
+  environment {
+        OCI_USER_ID     = credentials('jenkins-oci-user-id')
+        
+  }
   stages {
       stage('Create Fn Context') {
           
@@ -25,7 +29,7 @@ pipeline {
       stage('Deploy') {
         steps {
             
-            sh ' docker login -u \'sddlrhn3qfno/oracleidentitycloudservice/jason.greene@nanoputian.io\' -p \'4sHW;(wJqn;f<21CA0cG\' syd.ocir.io'
+            sh ' docker login -u \'$OCI_USER_ID_USR\' -p \'$OCI_USER_ID_PSW\' syd.ocir.io'
             sh 'cat ~/.docker/config.json'
           sh 'fn deploy --app sampleappInk --registry syd.ocir.io/sddlrhn3qfno/sampleappinkrepo --verbose '
         }
@@ -34,4 +38,5 @@ pipeline {
   }
   
 }
+
 
