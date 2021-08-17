@@ -41,6 +41,6 @@ public class HelloFunction {
        if( name.equals("world") & (!queryparams.get("name").isEmpty()) ){
           name = queryparams.get("name").get();
        }
-        return "Hello, " + name +  "!";
+        return "Hello, " + name +  " !";
     }
 }
